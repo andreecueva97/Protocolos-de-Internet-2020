@@ -1,0 +1,59 @@
+STP
+
+crea en el caso de que un camino no se pueda realizar un camino y toma otro.
+crea un tunel para mandar los datos sin crear bucles
+
+puerto raiz y designado
+
+el puerto raiz designado esta en estado de envio
+               es el de menor coste para llegar a destino/origen
+	       va a tener un puerto en ROOT y el otro en ALTE
+todos los demas puertos estan bloqueados
+
+puerto raiz, todos su puertos estan enviando
+puerto resplando, actua como el puerto raiz
+                  
+puente designado es el que tiene el camino mas corto
+                 tiene todos los puertos en DESI
+
+configuration
+=------------------------------------------------------------
+[huawei-ethernet0/0/1]shutdown (APAGAMOS el puerto para realizar
+                                la configuracion del SWITCH)
+[huawei-ethernet0/0/1]undo shutdown (PRENDEMOS el puerto para realizar
+                                la configuracion del SWITCH)
+=------------------------------------------------------------
+[huawei]stp mode stp  (ACTIVAMOS EL PROTOCOLO)
+[huawei]stp root primary   (configuramos con la PRIMARIA) 
+     EN EL OTRO
+=------------------------------------------------------------
+[huawei]stp mode stp  (ACTIVAMOS EL PROTOCOLO)
+[huawei]stp root secondary   (configuramos con la SEGUNDA) 
+
+=------------------------------------------------------------
+[huawei]display stp brief  (para ver la configuracion de stp
+                            en los puertos)
+=------------------------------------------------------------
+[huawei]display stp interface ethernet 0/0/1(PERMITE VER TODO LO QUE HACE
+                       STP EN ESE PUERTO)
+
+=------------------------------------------------------------
+	CIST BRIDGE 0
+	CIST ROOT/ERPC 0
+	ESTO INDICA QUE ES EL PUENTE RAIZ
+
+        CIST BRIDGE 4096
+        CIST ROOT/ERPC 0
+        ESTO INDICA QUE ES EL PUENTE DESIGNADO
+
+	CIST BRIDGE 0 ES MAS IMPORTANTE, SI ES 300 ES MENOS IMPORTANTE
+=--------------------------------------------------------------
+     ESTO PARA EL SWITCH
+[huawei]undo stp root   (ESTO ES PARA CAMBIAR LA PRIORIDAD)
+[huawei]stp priority 8192
+=--------------------------------------------------------------
+    ESTO PARA PUERTO DE CADA SWITCH
+[huawei-ethernet0/0/1]stp port priority 32
+=--------------------------------------------------------------
+ coste de puerto
+[huawei-ethernet0/0/1]stp cost 20000

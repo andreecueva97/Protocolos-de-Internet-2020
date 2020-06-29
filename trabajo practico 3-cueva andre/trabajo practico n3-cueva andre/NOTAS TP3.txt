@@ -1,0 +1,113 @@
+ 		quiq   (lo que hace es ponerle la misma vlan a todas afuera)
+	802.1q es vlan
+	802.1qinq es anidacion de vlan
+
+la inertag, la vlan que tiene de detras
+la outertag, la vlan que se le pega arriba
+vamos a hacer que una vlan encapsule a un conjunto de vlan por debajo
+
+vlan 10 y vlan 20 se van a llamar servis vlan.
+vlan200 es una vlan de multiples servicios.
+vlan200 va a tener un PACKAGE que dentro tiene la vlan 10 o 20 dependiendo
+ desde cual estas mandando
+vlan200 es como un tunel por donde va a pasar vlan10 o vlan20, y luego del otro tramo se puede
+ separar
+
+queremos meter una vlan dentro de otra, ESTO ES CAPA 2.
+
+CONFIGURACION DE LOS ACCESS SOBRE EL SWITCH:
+sys
+int giga 0/0/1
+port link-type acc
+vlan batch 10 20
+
+port default vlan 10
+int giga 0/0/2
+
+port link-t acc
+port def vl 20
+
+int giga 0/0/3
+undo port trunk allow-pass vlan200
+port link-t dot1q-tunnel   (en vez de definirlo como troncal se define como tunel)
+vlan 200
+int giga 0/0/3
+
+deberia poder hacer un ping desde una cpu:
+primer asignar 192.168.0.1
+	       255.255.255.0
+ahora hago el ping 
+
+
+
+del otro lado configuramos tambine:
+=----------------------------------------------
+sys
+vlan batch 10 20 200   (CREANDO VLANS)
+=----------------------------------------------
+
+int giga 0/0/1
+port link-t dot1q-tunnel  (DOT1Q)
+port default vlan 200
+ =---------------------------------------------
+int giga 0/0/2
+port link-t acc   (ACCESSO)
+port def vl 20
+=----------------------------------------------
+int giga 0/0/3
+port link-t tru      (TRONCAL)
+port tru all vl 10 20
+=----------------------------------------------
+disp current              (INFORMACION DE LA CONFIGURACION DEL ROUTER)
+                       (DARLE A ENTER PARA VER TODA LA INFO)
+
+=-----------------------------------------------
+int giga 0/0/1
+port priority 0 A 7 (ESTABLECER PRIORIDAD)
+                      (IGUAL ESTO DESPUES TE LO PEGA EN LA VLAN)
+                      (CUANDO CAPTURAS EL TRAFICO LO VES EN LA VLAN)
+port priority 0      BEST EFFORT(SI PUEDO LO HAGO NOMAS)
+
+=-----------------------------------------------
+NECESITAMOS DOS SWITCHS PORQUE EL 
+	SEGUNDO QUE PARECE LUEGO DEL QUE SE CONECTA A LA PC ES PARA ETIQUETAR
+	EL TERCERO ES PARA DESETIQUETAR.
+
+
+ENTONCES DE EL SWITCH QUE TIENE CONECTADO AL PC, TIENE ACCESS Y TRONCAL NOMAS.
+
+
+NOTA EL SWITCH QUE TIENE DOT1Q TUNNEL DEL OTRO LADO TIENE UN TRONCAL
+QUE DEJA PASAR UNICAMENTE UNA VLAN
+
+LA PRIORIDAD HACE QUE UN PAQUETE SALGA ANTES QUE OTRO
+VLAN 200 TIENE PRIORIDAD BEST EFFORT
+VLAN 10 DISTNTA PRIORIDAD VLAN 20
+
+
+42:00
+                    una forma de reiniciar una unica interface
+<HUAWEI> system-view
+[HUAWEI] interface gigabitethernet0/0/1
+[HUAWEI-GigabitEthernet0/0/1] undo port default vlan
+otra forma es :
+[HUAWEI-GigabitEthernet0/0/1] quit
+[HUAWEI] clear configuration interface gigabitethernet 0/0/1
+(el siguiente comando es para que vuelva habilitarse pero esta todo borrado
+lo que estaba en esa unica interface)
+[HUAWEI-GigabitEthernet0/0/1]undo shutdown
+
+otra forma es:
+<HUAWEI> system-view
+[HUAWEI] interface gigabitethernet0/0/1
+[HUAWEI-GigabitEthernet0/0/1] restart
+
+ESAS TRES ANTERIORES SON TRES FORMAS.
+
+
+ACCESO RAPIDO A LA CONFIGURACION DE UNA INTERFACE
+
+<HUAWEI> system-view
+[HUAWEI] interface gigabitethernet0/0/1
+[HUAWEI-GigabitEthernet0/0/1] display this
+

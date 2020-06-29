@@ -1,0 +1,4 @@
+inciso 2
+
+A pasar de estar todos los clientes conectados, le escribe de a uno, nos damos cuenta en el 
+sleep.

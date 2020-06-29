@@ -1,0 +1,1 @@
+colocar puertos y ip y en el puerto colocar 25 en ambos

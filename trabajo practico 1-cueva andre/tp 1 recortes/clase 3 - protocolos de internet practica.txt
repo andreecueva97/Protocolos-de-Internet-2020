@@ -1,0 +1,18 @@
+fork : al padre 1
+       en los hijos 0
+       devuelve al proceso 0, a los de mas procesos su ID.
+       if -> lo que hace el hijo
+       else -> lo que hace el padre
+       el padre tiene que cerrarr el socket y aceptar la prox. conexion
+       y no se cierra el otro proceso porque se crea una copia que queda abierta.
+       
+puertos: ippuerto 
+         la del servidor ES DEFINIDA
+         la del cliente la define el S.O.
+         EJ:1O PESTANAS EN EL BROWSER CON PUERTO DESTINO 443
+                                          PUERTO ORIGEN EL QUE SE LE OCURRA EL S.O.
+         Son numeros altos porque ORGANIZACION IANA asigna puertos que no son 
+         conocidos o no tienen nombre.
+
+------------------------tp1------------------
+    

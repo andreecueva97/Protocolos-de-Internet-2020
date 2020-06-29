@@ -1,0 +1,48 @@
+1 PRUEBA
+correr cliente(izquierda)
+
+$ ./tcp_CLIENT
+//si corro solo el uso es : usage: client hostname
+$ ./tcp_CLIENT localhost
+//connect: Connect refused  es el puerto al que yo me quiero
+//conectar, en la ip donde me quiero conectar pero esta cerrado
+
+
+
+
+
+
+
+
+
+
+correr SERVIDOR(derecha ->>)
+$ ./tcp_SERVER
+//NO HACE NADA HASTA QUE LE MANDE UN SEND EL CLIENTE
+
+
+2 PRUEBA
+correr SERVIDOR(DERECHA->>)
+$ctrl+C para cerrar lo anterior
+$ gcc tcp_SERVER.c -o tcp_SERVER //ejecutame tcp_SERVER.c y colocamelo en tcp_SERVER TAMBIEN SE PUEDE PONER OTRO NOMBRE COMO servidor u otro.
+$ ./tcp_SERVER // LISTO no aparece nada porque esta corriendo 
+ 
+
+correr CLIENTE(IZQUIERDA <--)
+$ ./tcp_CLIENT localhost
+Received: Hello, world! //este recibio Hello, world!
+
+Enviado  // este envio la palabra: Respuesta!
+
+//luego en el SERVIDOR APARECE ESTO:
+Server: got connection from 127.0.0.1 // obtuve una conexion de 127.0.0.1 porque estoy en la misma PC
+Enviado  // este envio el Hello, world!
+Received: Respuesta! // este la recibio aca
+
+3 PRUEBA
+
+correr CLIENTE(izquierda<--)
+$gcc tcp_CLIENT.c -o tcp_CLIENT
+$ ./tcp_CLIENT localhost
+
+

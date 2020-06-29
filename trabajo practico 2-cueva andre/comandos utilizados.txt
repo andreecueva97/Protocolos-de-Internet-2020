@@ -1,0 +1,49 @@
+___________________________________________________________________________
+Para las interfaces de cada router
+.system-view
+.interface GigabitEthernet 0/0/0
+.[....0/0/0]ip address 192.168.1.1  30
+                       direccionhos mascara
+.quit
+.quit
+.save
+.y
+.tecla enter enter 
+.cerras router
+____________________________________________________________________________
+Para ospf
+[Huawei]ospf
+[Huawei-ospf-1]area X
+[Huawei-ospf-1-area-0.0.0.X] network IP_DE_LA_RED WILDCARD
+[Huawei-ospf-1-area-0.0.0.X] quit
+
+ejemplo:
+11111111.11111111.11111111.11111100 /30
+El wildcard de /30 es
+todos los 1 a 0 y los 0 a 1
+00000000.00000000.00000000.00000011
+Wildcard -> 0.0.0.3
+-----------------------------
+ospf 1
+ area 0.0.0.0
+  network 192.168.0.0 0.0.0.3
+  network 192.168.0.8 0.0.0.3
+ area 0.0.0.2
+  network 192.168.2.4 0.0.0.3
+ area 0.0.0.3
+  network 192.168.3.0 0.0.0.3
+-----------------------------
+__________________________________________________________________________________
+Para las tablas de routeo
+display ip routing-table
+__________________________________________________________________________________
+__________________________________________________________________________________
+Consigna:
+Realizar en eNSP una configuración de Routeo utilizando OSPF.
+
+Utilizar direcciones IP del tipo 192.168.AreaRouter.X / 24
+
+Adjuntar a la entrega los archivos de configuración de 
+cada router, y un display de sus tablas de routeo.
+___________________________________________________________________________________
+___________________________________________________________________________________

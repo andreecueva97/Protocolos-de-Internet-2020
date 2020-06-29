@@ -1,0 +1,31 @@
+R4
+ge 0/0/0
+ge 0/0/1
+
+r5
+ge 0/0/0 LISTO
+GE 0/0/1 LISTO
+
+R1
+ge 0/0/0 LISTO
+GE 0/0/2 LISTO
+ge 0/0/1 LISTO
+ge 0/0/3 LISTO
+
+R6
+ge 0/0/1 LISTO
+ge 0/0/0 LISTO
+ge 0/0/2 LISTO
+ge 0/0/3 LISTO
+
+R2
+ge 0/0/0 LISTO
+ge 0/0/1 LISTO
+ge 0/0/2 LISTO
+ge 0/0/3 LISTO
+
+R3
+ge 0/0/0 LISTO
+ge 0/0/1 LISTO
+
+
